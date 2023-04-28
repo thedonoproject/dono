@@ -2,7 +2,28 @@
 
 later can change to react or nodejs
 
+use packages.json to include all the dependencies & keeping track of them
 
-import eleptic curve npm package and play around with it:
-    use salting to generate a privatekey & public key
-    for demo purpose do it here, but deal with the stuff only in the server while in deployement
+
+/*--------------------------------------------------- Mumbai Test net -------------------------------------------------------------------*/
+
+
+User flow: 
+            creates account : [params:{[user_id: unique, verifcation: true],[password: standard protocol, encryption: sha256], [user_name: any]}]
+            isMetaMaskPresent() : Y|n 
+                                    Y: abstract the data & auto connect to site 
+                                    n: ask : metamask ??  dono semi custodial wallet
+                                                metamask  -> guide & integrate 
+                                                dono      -> generate a partial custodial wallet, if requested transfer all data to their account --> all the assests wil be transfered(account will not be given to them)
+
+
+Development guidelines: 
+
+    metamask integration: demo data is used for the above metamask integration example
+                        whenever doing the full implementation, import ethers-js convert data to hexa form, sign the transaction data & post in the transaction snippet
+                        Should recheck all the transaction data 
+
+
+    import eleptic curve npm package and play around with it:
+        use salting to generate a privatekey & public key
+        for demo purpose do it here, but deal with the stuff only in the server while in deployement
