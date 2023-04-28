@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+    <style>
+        button {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Metamask Integration</h1>
+    <p id="status">Please install Metamask to use this application</p>
+    <button id="transact">Transact</button>
+    <script>
+        const txnBtn = document.getElementById("transact");
+        window.addEventListener('DOMContentLoaded', async () => {
+            // Detect if Metamask is installed
+            const provider = await detectEthereumProvider();
+            if (provider) {
+                // Set the status to connected
+                txnBtn.style.display = 'block';
+                txnBtn.addEventListener('click', transact);
+                document.getElementById("status").innerText = "Metamask is installed and connected";
+                // Access the user's accounts
+                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                // Get the current network ID
+                const networkId = await ethereum.request({ method: 'net_version' });
+                console.log(`Connected to network ${networkId}`);
+                console.log(`User account(s): ${accounts}`);
+                // Subscribe to account changes
+                ethereum.on('accountsChanged', (newAccounts) => {
+                    console.log(`User account(s) updated: ${newAccounts}`);
+                });
+                // Subscribe to network changes
+                ethereum.on('chainChanged', (chainId) => {
+                    console.log(`Connected to network ${chainId}`);
+                });
+            } else {
+                // Set the status to not connected
+                document.getElementById("status").innerText = "Please install Metamask to use this application";
+            }
+        });
+
+
+        //@dev code for sending the transaction start here
+        async function transact() {
+            try {
+                await ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [
+                        {
+                            chainId: '0xaa36a7'
+                        }
+                    ]
+                });
+            } catch (addError) {
+                console.log(addError);
+            }
+            const transactionParameters = {
+                nonce: '0x00', // ignored by MetaMask
+                gasPrice: '0x09184e72a000', // customizable by user during MetaMask confirmation.
+                gas: '0x2710', // customizable by user during MetaMask confirmation.
+                to: '0x0000000000000000000000000000000000000000', // Required except during contract publications.
+                from: ethereum.selectedAddress, // must match user's active address.
+                value: '0x00', // Only required to send ether to the recipient from the initiating external account.
+                data:
+                    '0x7f7465737432000000000000000000000000000000000000000000000000000000600057', // Optional, but used for defining smart contract creation and interaction.
+                chainId: '0x3', // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
+            };
+            // txHash is a hex string
+            // As with any RPC call, it may throw an error
+            const txHash = await ethereum.request({
+                method: 'eth_sendTransaction',
+                params: [transactionParameters],
+            });
+        }
+    </script>
+</body>
+
+</html>

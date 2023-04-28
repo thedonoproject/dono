@@ -1,0 +1,8 @@
+//integrating metamask using metamask sdk - pure js
+
+later can change to react or nodejs
+
+
+import eleptic curve npm package and play around with it:
+    use salting to generate a privatekey & public key
+    for demo purpose do it here, but deal with the stuff only in the server while in deployement
