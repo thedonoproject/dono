@@ -27,3 +27,44 @@ Development guidelines:
     import eleptic curve npm package and play around with it:
         use salting to generate a privatekey & public key
         for demo purpose do it here, but deal with the stuff only in the server while in deployement
+
+
+-----------------------------------------------------Block Chain Network Considerations-------------------------------------------------------
+
+basic requirements on the chain: types 2 -> (1) writing to chain (2) retrieving from the chain
+
+    (1) Writing to the chain:
+            NFT issues --> static nft, for type of donation(first tx, donated for planet green, dontated 1million ...) & a upgradable NFT resembling user proefficiency on dono
+                --> issuing NFT's on a bigger chain like polygon adds value to them.  ---> suggestions for NFT optimsed chains accepted
+                --> insted of some other L2s
+                --> NFT data is stored in ipfs (nft.storage or filebase or filecoin or fleet) --> waiting for suggestions on much better alterative decentralised storage providers
+            Storing user commited Transaction data
+            Storing Foundation commited usage data
+            If possible ERC token
+            #main (or) core 
+                sending the value sent to the smart contract deployed on the specific chains ---> insted of any crypto EOA
+                    --> This gives control over development of all sort of escrow, governance controls
+                    --> So this restricts ourselves in using specific chains (or) going with selected chains first approach
+                    --> whenever a specific transaction is finished, it outputs a status success & failure
+                            --> If success, emits an event where one of our endpoint is listening and does the remaining execution process both on chain & off chain
+                            --> If transfer transaction fails, funds will never get struck in between they stay safe in users account, end point listens to the failure & tells the front end
+            #main (or) core & #doubtfulAboutTheImplementationStage --> I feel it to be a later scalable solution
+                when ever a charity or some entity tries to start a fund raising campaign, they fill out all the requirements as they do in web2 with every detail & necessities
+                So, based on the options they provide, our back end generates & deployes the smart contract which is in the form of a prebuilt library to various chains they provide & listening to erc20 transfer 
+                So, we can even impose our fee part here based on their cause & size (simply locks some of the value & allows only the allocated amount to be withdrawn by both the parties)
+            #main (or) core & charity-end
+                The deployed fundraising contract on all chains will have ability to allocate roles to different user accounts, so that they can make different types of transfer requests which can either be auto approved or manually approved depending on the user role & type pre-defined
+                The receivers address should be only added by charity owner or should request approval for transfering to receiver address not listed by charity
+
+            #main (or) core #dono-ledger
+                we maintain endpoints from alchemy/moralis/infura for operations done on ethereum, bitcoin, polygon, arbitrum, avalanche,optimism,bnb, near
+                integrating the transaction hashes with the mongo db --> for future reference (morlais provides this feature)
+                polygon / avalanche subnetwork or any other better
+            
+            #key features of moralis
+                --> streaming of block chain data to mongodb from their endpoint
+                --> web3 user authentication
+
+    (2) retrieving from the chain --> 
+            data retrieval from endpoints for various purposes
+            not a big issue because of availability of different solutions, either using prebuilt endpoints or running a node(for L2 avalance if not infura)
