@@ -59,7 +59,7 @@ basic requirements on the chain: types 2 -> (1) writing to chain (2) retrieving 
             #main (or) core #dono-ledger
                 we maintain endpoints from alchemy/moralis/infura for operations done on ethereum, bitcoin, polygon, arbitrum, avalanche,optimism,bnb, near
                 integrating the transaction hashes with the mongo db --> for future reference (morlais provides this feature)
-                polygon / avalanche subnetwork or any other better
+                polygon / avalanche subnetwork or any other better  --> subnet can be made as a later implementation when scaling
             
             #key features of moralis
                 --> streaming of block chain data to mongodb from their endpoint
