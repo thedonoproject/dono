@@ -1,7 +1,12 @@
 {
   "dependencies": {
-    "metamask": "^0.0.1-security",
-    "elliptic": "6.5.4"
+    "@safe-global/auth-kit": "^1.0.0",
+    "@web3auth/base": "^5.2.0",
+    "@web3auth/modal": "^5.2.0",
+    "@web3auth/openlogin-adapter": "^5.2.0",
+    "browserify-zlib": "^0.2.0",
+    "elliptic": "6.5.4",
+    "metamask": "^0.0.1-security"
   },
   "name": "dono",
   "version": "1.0.0",
